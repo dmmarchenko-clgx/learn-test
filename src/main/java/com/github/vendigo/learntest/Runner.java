@@ -13,25 +13,17 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class Runner implements CommandLineRunner {
 
-    private final OrdersRepository ordersRepository;
+    private final OrdersService ordersService;
 
     @Override
     public void run(final String... args) {
-        final Order order1 = new Order(1L, "Dmytro", Arrays.asList("Xiaomi Mi router 3", "Drobak USB Type-C wire"));
-        final Order order2 = new Order(2L, "Ivan", Arrays.asList("Samsung Gear 3 Sport", "Samsung Galaxy Note 8"));
-        ordersRepository.save(Arrays.asList(order1, order2));
-        printOrders();
+        final Order order1 = new Order("Dmytro", Arrays.asList("Xiaomi Mi router 3", "Drobak USB Type-C wire"));
+        final Order order2 = new Order("Ivan", Arrays.asList("Samsung Gear 3 Sport", "Samsung Galaxy Note 8"));
+        final Order order3 = new Order("Petro", Arrays.asList("Samsung Gear 4", "Samsung Galaxy Note 9"));
+        ordersService.put(1L, order1);
+        ordersService.put(2L, order2);
+        ordersService.put(3L, order3);
 
-        final Order order3 = new Order(3L, "Petro", Arrays.asList("Samsung Gear 4", "Samsung Galaxy Note 9"));
-        ordersRepository.save(order3);
-        printOrders();
-
-        ordersRepository.deleteAll();
-        printOrders();
-    }
-
-    private void printOrders() {
-        log.info("Orders:");
-        ordersRepository.findAll().forEach(order -> log.info("{}", order));
+        //ordersService.deleteAll();
     }
 }

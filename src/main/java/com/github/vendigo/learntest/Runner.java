@@ -11,7 +11,17 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class Runner implements CommandLineRunner {
 
+    private final PetService petService;
+    private final GreetingService greetingService;
+
     @Override
     public void run(final String... args) {
+        log.info("-------------- Start actions --------------");
+        greetingService.sayHello();
+        petService.feedTheDog("Bim");
+        petService.petTheCat("Murka");
+        petService.feedTheCat("Romka");
+        greetingService.sayGoodbye();
+        log.info("-------------- Finish actions --------------");
     }
 }
